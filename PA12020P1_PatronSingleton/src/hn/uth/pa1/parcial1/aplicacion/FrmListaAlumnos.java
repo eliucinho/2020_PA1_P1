@@ -5,6 +5,8 @@
  */
 package hn.uth.pa1.parcial1.aplicacion;
 
+import hn.uth.pa1.parcial1.aplicacion.objetos.Alumno;
+
 /**
  *
  * @author uth
@@ -32,6 +34,7 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         btnAgregarAlumno = new javax.swing.JButton();
         btnCargarDatos = new javax.swing.JButton();
+        btnConsultarAlumno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +49,11 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
                 "Cuenta", "Nombre", "Año de Nacimiento"
             }
         ));
+        tblAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlumnosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAlumnos);
 
         lblTitulo.setText("Litsa Alumnos");
@@ -64,6 +72,13 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
             }
         });
 
+        btnConsultarAlumno.setText("Consultar Alumno");
+        btnConsultarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarAlumnoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,16 +89,19 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
                         .addContainerGap(15, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(lblTitulo)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(23, 23, 23)
+                        .addComponent(btnAgregarAlumno)
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnConsultarAlumno)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCargarDatos)
+                                .addGap(20, 20, 20))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTitulo)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(btnAgregarAlumno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCargarDatos)
-                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +111,8 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarAlumno)
-                    .addComponent(btnCargarDatos))
+                    .addComponent(btnCargarDatos)
+                    .addComponent(btnConsultarAlumno))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -104,9 +123,7 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
 
     private void btnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAlumnoActionPerformed
         // TODO add your handling code here:
-        FrmAlumno frmAlumno=new FrmAlumno();
-        frmAlumno.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        frmAlumno.setVisible(true);
+        util.mostrarFormulario(new FrmAlumno());
     }//GEN-LAST:event_btnAgregarAlumnoActionPerformed
 
     private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDatosActionPerformed
@@ -118,6 +135,27 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
             }
         ));
     }//GEN-LAST:event_btnCargarDatosActionPerformed
+
+    private void tblAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMouseClicked
+        // TODO add your handling code here:
+        int filaSeleccionada=tblAlumnos.getSelectedRow();
+        System.out.println("fila: "+filaSeleccionada);
+        
+        String cuenta=(String) tblAlumnos.getValueAt(filaSeleccionada, 0);
+        String nombre=(String) tblAlumnos.getValueAt(filaSeleccionada, 1);
+        String anio=(String) tblAlumnos.getValueAt(filaSeleccionada, 2);
+        
+        //LLenando el elemento actual, con la informacion en la tabla
+        Alumno alumno=new Alumno(cuenta, nombre, Integer.parseInt(anio));
+        
+        alumnoController.configurarAlumnoActual(alumno);
+        
+    }//GEN-LAST:event_tblAlumnosMouseClicked
+
+    private void btnConsultarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarAlumnoActionPerformed
+        // TODO add your handling code here:
+        util.mostrarFormulario(new FrmConsultaAlumno());
+    }//GEN-LAST:event_btnConsultarAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,6 +195,7 @@ public class FrmListaAlumnos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarAlumno;
     private javax.swing.JButton btnCargarDatos;
+    private javax.swing.JButton btnConsultarAlumno;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tblAlumnos;

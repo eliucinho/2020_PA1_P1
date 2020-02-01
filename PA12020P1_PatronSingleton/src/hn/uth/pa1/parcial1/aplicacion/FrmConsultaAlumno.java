@@ -19,8 +19,19 @@ public class FrmConsultaAlumno extends javax.swing.JFrame {
      */
     public FrmConsultaAlumno() {
         initComponents();
+        cargarAlumno();
     }
 
+    public void cargarAlumno(){
+        Alumno alumno=alumnoController.getAlumnoActual();
+        txtNombre.setText(alumno.getNombre());
+        txtCuenta.setText(alumno.getCuenta());
+        txtAnioNacimiento.setText(""+alumno.getAnioNacimiento());
+        JOptionPane
+                .showMessageDialog
+                    (this,"Registro Cargado: "+alumnoController.getAlumnoActual());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,13 +132,7 @@ public class FrmConsultaAlumno extends javax.swing.JFrame {
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         // TODO add your handling code here:
         //1.- Hacer la lectura del formulario
-        Alumno alumno=alumnoController.getAlumnoActual();
-        txtNombre.setText(alumno.getNombre());
-        txtCuenta.setText(alumno.getCuenta());
-        txtAnioNacimiento.setText(""+alumno.getAnioNacimiento());
-        JOptionPane
-                .showMessageDialog
-                    (this,"Registro Cargado: "+alumnoController.getAlumnoActual());
+        cargarAlumno();
     }//GEN-LAST:event_btnCargarActionPerformed
 
     /**

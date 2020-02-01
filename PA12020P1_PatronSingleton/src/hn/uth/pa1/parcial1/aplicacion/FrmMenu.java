@@ -74,16 +74,12 @@ public class FrmMenu extends javax.swing.JFrame {
 
     private void btnFormularioAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormularioAlumnoActionPerformed
         // TODO add your handling code here:
-        FrmAlumno frmAlumno=new FrmAlumno();
-        frmAlumno.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        frmAlumno.setVisible(true);
+        util.mostrarFormulario(new FrmAlumno());
     }//GEN-LAST:event_btnFormularioAlumnoActionPerformed
 
     private void btnFormularioConsultaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormularioConsultaAlumnoActionPerformed
         // TODO add your handling code here:
-        FrmConsultaAlumno frmAlumno=new FrmConsultaAlumno();
-        frmAlumno.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        frmAlumno.setVisible(true);
+        util.mostrarFormulario(new FrmConsultaAlumno());
     }//GEN-LAST:event_btnFormularioConsultaAlumnoActionPerformed
 
     /**
