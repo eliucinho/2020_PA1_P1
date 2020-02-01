@@ -38,6 +38,7 @@ public class FrmAlumno extends javax.swing.JFrame {
         lblAnioNacimiento = new javax.swing.JLabel();
         txtAnioNacimiento = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        btnGuardarLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +50,17 @@ public class FrmAlumno extends javax.swing.JFrame {
 
         lblAnioNacimiento.setText("Año Nacimiento:");
 
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Guardar Alumno Actual");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnGuardarLista.setText("Guardar en lista");
+        btnGuardarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarListaActionPerformed(evt);
             }
         });
 
@@ -83,8 +91,10 @@ public class FrmAlumno extends javax.swing.JFrame {
                         .addGap(171, 171, 171)
                         .addComponent(lblTitulo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(btnGuardar)))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnGuardarLista)
+                            .addComponent(btnGuardar))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,9 +114,11 @@ public class FrmAlumno extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAnioNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAnioNacimiento))
-                .addGap(53, 53, 53)
+                .addGap(40, 40, 40)
                 .addComponent(btnGuardar)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardarLista)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,6 +142,24 @@ public class FrmAlumno extends javax.swing.JFrame {
                 .showMessageDialog
                     (this,"Registro Almacenado: "+alumnoController.getAlumnoActual());
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnGuardarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarListaActionPerformed
+        // TODO add your handling code here:
+        String cuenta=txtCuenta.getText();
+        String nombre=txtNombre.getText();
+        String anioNacimiento=txtAnioNacimiento.getText();
+        
+        Alumno alumno=new Alumno
+                      (cuenta
+                      , nombre
+                      , Integer.parseInt(anioNacimiento) );
+        
+        alumnoController.agregarAlumnoLista(alumno);
+        
+        JOptionPane
+                .showMessageDialog
+                    (this,"Registro Almacenado: "+alumno);
+    }//GEN-LAST:event_btnGuardarListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +198,7 @@ public class FrmAlumno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnGuardarLista;
     private javax.swing.JLabel lblAnioNacimiento;
     private javax.swing.JLabel lblCuenta;
     private javax.swing.JLabel lblNombre;
